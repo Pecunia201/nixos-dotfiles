@@ -54,12 +54,16 @@
         }
       ];
     };
-    shellAliases = {
-      ll = "ls -l";
-      lag = "ls -ag";
-      ls = "ls --color='always'";
-      grep = "grep --color='always'";
-      "..." = "../..";
+    
+    shellAliases =
+      let
+	flakeDir = "~/nixos";
+      in {
+        ls = "ls --color='always'";
+        v = "vim";
+        rebuild = "sudo nixos-rebuild switch --flake ${flakeDir}#default";
+        config = "sudo vim ${flakeDir}/configuration.nix";
+        hm = "sudo vim ${flakeDir}/home.nix";
     };
 
     # p10k Home manager config: https://github.com/nix-community/home-manager/issues/1338#issuecomment-651807792
@@ -67,12 +71,6 @@
       # p10k instant prompt
       local P10K_INSTANT_PROMPT="${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-
-      # Custom completions
-      # TODO: get rid of it?
-      fpath+=("$XDG_DATA_HOME/zsh/completions")
-
-      # correction
     '';
 
     initExtra = ''
@@ -82,13 +80,7 @@
       typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
       if [[ -f $XDG_DATA_HOME/zsh/zshrc ]]; then source $XDG_DATA_HOME/zsh/zshrc; fi
-
-      # other nice things
-      bindkey "^[[3~" delete-char
-      bindkey "^[[H" beginning-of-line
-      bindkey "^[[F" end-of-line
-      bindkey "^[[1;5D" backward-word
-      bindkey "^[[1;5C" forward-word
+      
       source $HOME/nixos/configs/p10k
     '';
   };
