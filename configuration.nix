@@ -148,7 +148,10 @@
     cmatrix
     tree
     libvirt 
+    htop
   ]; 
+
+  virtualisation.libvirtd.enable = true;
 
   programs.steam.enable = true; 
   
