@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 { 
  # Enable OpenGL
@@ -39,17 +39,5 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.pecunia = {
-    isNormalUser = true;
-    description = "Pecunia";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 }

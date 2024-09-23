@@ -7,9 +7,9 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./cfg_modules/hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-      ./cfg_modules/nividia.nix
+      ./cfg_modules/nvidia.nix
     ];
 
   # Bootloader.

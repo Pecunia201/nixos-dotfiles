@@ -46,7 +46,7 @@
 
       if [[ -f $XDG_DATA_HOME/zsh/zshrc ]]; then source $XDG_DATA_HOME/zsh/zshrc; fi
 
-      source $HOME/nixos/configs/p10k
+      source $HOME/nixos/hm_modules/p10k
     '';
   };
 }
