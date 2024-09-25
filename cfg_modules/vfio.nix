@@ -1,30 +1,38 @@
-{ config, pkgs, lib, ... }:
-
-{
-  # Enable VFIO
-  config.vfio.enable = with lib; mkEnableOption "Configure the machine for VFIO";
-
-  # Define boot parameters
-  boot.initrd.kernelModules = [
-    "vfio_pci"
-    "vfio"
-    "vfio_iommu_type1"
-    "vfio_virqfd"
-    "i915"
-    "i915_modeset"
+let
+  # RTX 3070 Ti
+  gpuIDs = [
+    "10de:2488" # Graphics
+    "10de:228b" # Audio
   ];
+in { pkgs, lib, config, ... }: {
+  options.vfio.enable = with lib;
+    mkEnableOption "Configure the machine for VFIO";
 
-  boot.kernelParams = [
-    # enable IOMMU
-    "intel_iommu=on"
-  ] ++ lib.optional config.vfio.enable
-    # isolate the GPU
-    ("vfio-pci.ids=" + lib.concatStringsSep "," [
-      "8086:3e92" # Graphics
-      "8086:a2f0" # Audio
-    ]);
+  config = let cfg = config.vfio;
+  in {
+    boot = {
+      initrd.kernelModules = [
+        "vfio_pci"
+        "vfio"
+        "vfio_iommu_type1"
+        "vfio_virqfd"
 
-  hardware.opengl.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_uvm"
+        "nvidia_drm"
+      ];
+
+      kernelParams = [
+        # enable IOMMU
+        "intel_iommu=on"
+      ] ++ lib.optional cfg.enable
+        # isolate the GPU
+        ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
+    };
+
+    hardware.opengl.enable = true;
+    #virtualisation.spiceUSBRedirection.enable = true;
+  };
 }
 
