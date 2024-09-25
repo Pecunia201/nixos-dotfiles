@@ -10,6 +10,7 @@
       ./cfg_modules/hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./cfg_modules/nvidia.nix
+      ./cfg_modules/vm.nix
     ];
 
   # Bootloader.
@@ -94,9 +95,6 @@
 
   users.defaultUserShell = pkgs.zsh;
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -107,12 +105,15 @@
   environment.systemPackages = with pkgs; [
     vim
     cmatrix
-    tree
-    libvirt 
+    tree 
     htop
-  ]; 
+    
+    dex
+  ];
 
-  virtualisation.libvirtd.enable = true;
+  programs.firefox = {
+    enable = true;
+  };
 
   programs.steam.enable = true; 
   

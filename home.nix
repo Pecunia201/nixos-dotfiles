@@ -20,25 +20,16 @@
   # environment.
   home.packages = with pkgs; [
     fastfetch
-    virt-manager
-    looking-glass-client
     vscode
     spotify
     (pkgs.discord.override {
       withVencord = true;
     })
+    altserver-linux #alt-server
   ];
 
   programs.alacritty = {
 	enable = true;
-  };
-  
-  # configure virt-manager
-  dconf.settings = {
-	"org/virt-manager/virt-manager/connections" = {
-		autoconnect = ["qemu:///system"];
-		uris = ["qemu:///system"];
-	};
   };
 
   programs.git = {
