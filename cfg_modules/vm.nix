@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -32,5 +32,4 @@
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
-
 }
