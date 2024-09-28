@@ -11,7 +11,10 @@
       inputs.home-manager.nixosModules.default
       ./cfg_modules/nvidia.nix
       ./cfg_modules/vm.nix
-    ];
+      #./cfg_modules/vfio.nix
+    ];  
+  
+  #vfio.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -104,11 +107,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-    cmatrix
     tree 
     htop
     
     dex
+    pciutils
   ];
 
   programs.firefox = {

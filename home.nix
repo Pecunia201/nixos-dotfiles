@@ -25,7 +25,7 @@
     (pkgs.discord.override {
       withVencord = true;
     })
-    altserver-linux #alt-server
+    anki
   ];
 
   programs.alacritty = {
