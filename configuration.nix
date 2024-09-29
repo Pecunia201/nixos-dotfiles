@@ -11,10 +11,8 @@
       inputs.home-manager.nixosModules.default
       ./cfg_modules/nvidia.nix
       ./cfg_modules/vm.nix
-      #./cfg_modules/vfio.nix
-    ];  
-  
-  #vfio.enable = true;
+      ./cfg_modules/cn_keyboard.nix
+    ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
