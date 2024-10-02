@@ -25,10 +25,11 @@
     (pkgs.discord.override {
       withVencord = true;
     })
-
+	
     # Study programs
     anki
     obsidian
+    kolourpaint
   ];
 
   programs.alacritty = {
