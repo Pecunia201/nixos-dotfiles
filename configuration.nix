@@ -11,11 +11,10 @@
     ];
 
   # Bootloader
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
+  boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Automatically run garbage collection and remove last generations
-  nix.gc.automatic = true;
   boot.loader.grub.configurationLimit = 25;
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -101,6 +100,7 @@
     htop
     dex
     pciutils
+    pkg-config
   ];
 
   programs.firefox = {
@@ -117,5 +117,5 @@
     };
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

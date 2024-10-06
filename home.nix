@@ -24,12 +24,15 @@
     spotify
     (pkgs.discord.override {
       withVencord = true;
+      withOpenASAR = true;
     })
 	
     # Study programs
     anki
     obsidian
     kolourpaint
+
+    # Programming
   ];
 
   programs.alacritty = {
