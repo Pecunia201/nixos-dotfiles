@@ -26,6 +26,11 @@
       withVencord = true;
       withOpenASAR = true;
     })
+    
+    protonvpn-gui_legacy
+    qbittorrent
+
+    libsForQt5.kdenlive
 	
     # Study programs
     anki
@@ -38,6 +43,8 @@
   programs.alacritty = {
 	enable = true;
   };
+
+  programs.firefox.enable = true;
 
   programs.git = {
 	enable = true;

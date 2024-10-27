@@ -11,8 +11,7 @@
     ];
 
   # Bootloader
-  boot.kernelPackages = pkgs.linuxPackages_6_10;
-  boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.configurationLimit = 25;
@@ -45,8 +44,10 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.displayManager.sddm.enable = true;
+  #services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true; 
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -102,10 +103,6 @@
     pciutils
     pkg-config
   ];
-
-  programs.firefox = {
-    enable = true;
-  };
 
   programs.steam.enable = true; 
   
